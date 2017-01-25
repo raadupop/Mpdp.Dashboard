@@ -1,0 +1,86 @@
+<div class="padded-content-page">
+    <p class="md-subhead">Triangular comes with Material and Font Awesome Icons which can be used in your admin pages and buttons.</p>
+
+    <div class="objectives-page md-whiteframe-z3" layout="column">
+        <md-toolbar class="md-primary">
+            <div class="md-toolbar-tools">
+                <h2>
+                  <span>{{vm.goalsResult.goalsCount}} Goals</span>
+                </h2>
+            </div>
+        </md-toolbar>
+
+        <div layout="row" layout-align="space-around center" style="margin-top: 10px;">
+            <md-input-container>
+                <label>Find a goal</label>
+                <input type="text" ng-model="searchGoal">
+            </md-input-container>
+            <md-select placeholder="Sort by status" ng-model="status">
+                <md-option ng-value="gstatus" ng-repeat="gstatus in ::vm.goalStatus">{{:: gstatus}}</md-option>
+            </md-select>
+        </div>
+
+        <div layout="row" class="md-whiteframe-z1">
+            <md-content class="goal-list"layout="column">
+                <md-list style="padding: 0px;">
+                    <md-list-item class="md-2-line" ng-repeat="goal in vm.goalsResult.goals | filter:{ Name: searchGoal, GoalStatus: status }" ng-click="vm.selectGoal(goal)" ng-class="{sel: goal == vm.goalSelected}">
+                        <div class="md-list-item-text">
+                            <h3>{{::goal.Name}}</h3>
+                            <h4>{{::goal.GoalStatus}}</h4>
+                        </div>
+                    </md-list-item>
+                </md-list>
+            </md-content>
+            <div class="objectives-display objective-dialog" layout="column" flex>
+                <div layout="row" layout-align="space-around center" class="margin-top-50" ng-show="vm.goalSelected == null">
+                    <p>Select a goal from the list on the left</p>
+                </div>
+                <div layout="row" ng-show="vm.goalSelected !== null"layout-md="column" cache-view="false">
+                    <tri-widget flex title="Goal objectives" content-layout="column">
+                        <md-data-table-container>
+                            <table md-data-table class="md-data-table" layout-align="space-around center" md-progress="vm.deferred">
+                                <thead md-order="vm.query.order" md-trigger="vm.getUsers">
+                                <tr>
+                                    <th name="Date" order-by="DateCreated" decend-first></th>
+                                    <th name="Name" order-by="Name"></th>
+                                    <th name="Status" order-by="GoalStatus"></th>
+                                    <th name="Ranked" order-by="Ranked"></th>
+                                    <th name="Details"></th>
+                                    <th name="Remove"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="objective in vm.goalSelected.Objectives | orderBy: vm.query.order | limitTo: vm.query.limit : (vm.query.page -1) * vm.query.limit">
+                                    <td>{{::objective.DateCreated | date}}</td>
+                                    <td>{{::objective.Title}}</td>
+                                    <td>
+                                         <span class="status" ng-class="'status-' + objective.ObjectiveStatus">
+                                           {{::objective.ObjectiveStatus}}
+                                         </span>
+                                    </td>
+                                    <td>
+                                         <span class="status" ng-class="'ranked-' + objective.ObjectiveRank">
+                                           {{::objective.ObjectiveRank}}
+                                         </span>
+                                    </td>
+                                    <td>
+                                        <md-button ng-click="vm.openObjective(objective, $event)" class="md-icon-button" aria-label="Open Goal">
+                                            <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
+                                        </md-button>
+                                    </td>
+                                    <td>
+                                        <md-button ng-click="vm.removeObjective(objective, $event)" class="md-icon-button" aria-label="Open Goal">
+                                            <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                                        </md-button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </md-data-table-container>
+                        <md-data-table-pagination md-limit="vm.query.limit" md-page="vm.query.page" md-total="{{vm.goalsResult.goalsCount}}"></md-data-table-pagination>
+                    </tri-widget>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

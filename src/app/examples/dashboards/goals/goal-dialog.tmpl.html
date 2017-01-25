@@ -1,0 +1,142 @@
+<md-dialog class="order-dialog mobile-fullwidth-dialog" flex="60" flex-xs="100">
+    <md-tabs class="example-tabs-nopadding" md-dynamic-height md-border-bottom>
+        <md-tab label="General Details">
+            <md-content class="md-padding">
+                <md-toolbar>
+                    <div class="md-toolbar-tools">
+                        <h2 flex >
+                            <span>Goal</span><span> #{{vm.goal.Id}}</span>
+                        </h2>
+                        <md-button class="md-icon-button" ng-click="vm.printClick()" aria-label="print">
+                            <md-icon md-font-icon="zmdi zmdi-print"></md-icon>
+                        </md-button>
+                        <md-button class="md-icon-button" ng-click="vm.cancelClick()" aria-label="cancel">
+                            <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                        </md-button>
+                    </div>
+                </md-toolbar>
+                <md-dialog-content class="md-dialog-content">
+                    <div flex layout="row" class="margin-bottom-20">
+                        <div flex>
+                            <strong>Goal created date</strong>
+                        </div>
+                        <div flex>
+                            <span>{{vm.goal.DateCreated | amDateFormat:'MMMM Do YYYY, h:mm:ss a'}}</span>
+                        </div>
+                    </div>
+                    <div flex layout="row" class="margin-bottom-20">
+                        <div flex>
+                            <strong>Goal name</strong>
+                        </div>
+                        <div flex>
+                            <span>{{vm.goal.Name}}</span>
+                        </div>
+                    </div>
+                    <div flex layout="row" class="margin-bottom-20">
+                        <div flex>
+                            <strong translate>Goal status</strong>
+                        </div>
+                        <div flex>
+                            <span>{{vm.goal.GoalStatus}}</span>
+                        </div>
+                    </div>
+                    <div flex layout="row" class="margin-bottom-20">
+                        <div flex>
+                            <strong>Original estimate by time</strong>
+                        </div>
+                        <div flex>
+                            <span>{{vm.goal.Estimation | duration}}</span>
+                        </div>
+                    </div>
+                    <div flex layout="row" class="margin-bottom-20">
+                        <div flex>
+                            <strong>Remaining estimation</strong>
+                        </div>
+                        <div flex>
+                            <span>{{vm.goal.RemainingEstimates | duration}}</span>
+                        </div>
+                    </div>
+                    <div flex layout="row" class="margin-bottom-20">
+                        <div flex>
+                            <strong>Time worked</strong>
+                        </div>
+                        <div flex>
+                            <span>{{vm.goal.TimeLogged | duration}}</span>
+                        </div>
+                    </div>
+
+                    <div flex layout="row" class="margin-bottom-20">
+                        <div flex>
+                            <strong>Number of objectives subscribed</strong>
+                        </div>
+                        <div flex>
+                            <span>{{vm.goal.ObjectivesCount}}</span>
+                        </div>
+                    </div>
+                    <div flex layout="row" class="margin-bottom-20">
+                        <div flex>
+                            <strong>Goal progress</strong>
+                        </div>
+                        <div flex>
+                            <span><md-progress-linear class="md-accent margin-bottom-20" md-mode="determinate" value="{{vm.goal.Progress}}"></md-progress-linear></span>
+                        </div>
+                    </div>
+                    <div flex layout="row" class="margin-bottom-20">
+                        <div flex>
+                            <strong>Goal description</strong>
+                        </div>
+                        <div flex>
+                            <span>{{vm.goal.Description}}</span>
+                        </div>
+                    </div>
+                    <md-divider class="margin-bottom-20 margin-top-60"></md-divider>
+                </md-dialog-content>
+                <md-dialog-actions layout="row">
+                    <md-button ng-click="vm.okClick()" class="md-primary" aria-label="{{GENERAL.OK | translate}}" translate="GENERAL.OK"></md-button>
+                </md-dialog-actions>
+            </md-content>
+        </md-tab>
+        <md-tab label="Goal update">
+            <md-content class="md-padding">
+                <form name="goal" class="margin-top-20">
+                    <md-input-container class="md-block">
+                        <label>Name</label>
+                        <input type="text" ng-model="vm.goal.Name" required/>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Description</label>
+                        <textarea rows="4" ng-model="vm.goal.Description" required/>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Estimate</label>
+                        <input type="text" name="estimation" ng-model="vm.goal.Estimation | duration" valid-estimation required/>
+                        <div  ng-messages="goal.estimation.$error">
+                            <span ng-message="estimationValidator">Please follow the example.</span>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Remaning estimate</label>
+                        <input type="text" name="remainingEstimation" ng-model="vm.goal.RemainingEstimates | duration" valid-estimation required/>
+                        <div  ng-messages="goal.remainingEstimation.$error">
+                            <span ng-message="estimationValidator">Please follow the example.</span>
+                        </div>
+                    </md-input-container>
+                    <md-select placeholder="Pick" ng-model="vm.goal.GoalStatus">
+                        <md-option value="Open">Open</md-option>
+                        <md-option value="Blocked">Blocked</md-option>
+                        <md-option value="InProgress">InProgress</md-option>
+                        <md-option value="Done">Done</md-option>
+                        <md-option value="Closed">Closed</md-option>
+                        <md-option value="StandBy">StandBy</md-option>
+                    </md-select>
+                    <span>Goal Progress - Value: {{vm.goal.Progress}}</span>
+                    <md-slider min="0" max="100" ng-model="vm.goal.Progress" ng-init="vm.goal.Progress" aria-label="default value"></md-slider>
+                    <div layout="row" layout-align="end center">
+                        <md-button class="md-primary" ng-click="vm.updateClick()" ng-disabled="goal.$invalid">Update</md-button>
+                        <md-button ng-click="vm.okClick()">Cancel</md-button>
+                    </div>
+                </form>
+            </md-content>
+        </md-tab>
+    </md-tabs>
+</md-dialog>

@@ -1,0 +1,106 @@
+<div class="padded-content-page goals-dashboard">
+    <div layout="row" layout-margin>
+        <tri-widget class="widget-blog" flex="60" flex-xs="100" content-layout="column" content-layout-align="start center">
+            <img src="assets/images/backgrounds/material-backgrounds/mb-bg-01.jpg" alt="some bg">
+            <div class="widget-blog-text padding-10" ng-cloak>
+                <h2>A dream is a goal with a deadline!</h2>
+                <p>We challenged ourselves to create a visual language for our users that synthesizes the classic principles of good design with the innovation and possibility of technology and science. This is material design.</p>
+                <md-fab-speed-dial md-direction="up" class="md-fling">
+                    <md-fab-trigger>
+                        <md-button aria-label="share this post" class="md-fab md-warn">
+                            <md-icon md-font-icon="zmdi zmdi-share"></md-icon>
+                        </md-button>
+                    </md-fab-trigger>
+                    <md-fab-actions>
+                        <md-button aria-label="twitter" class="md-fab md-raised md-mini" ng-click="share('Shared on Twitter', $event)">
+                            <md-icon md-font-icon="fa fa-twitter"></md-icon>
+                        </md-button>
+                        <md-button aria-label="facebook" class="md-fab md-raised md-mini" ng-click="share('Shared on Facebook', $event)">
+                            <md-icon md-font-icon="fa fa-facebook"></md-icon>
+                        </md-button>
+                        <md-button aria-label="google-plus" class="md-fab md-raised md-mini" ng-click="share('Shared on Google+', $event)">
+                            <md-icon md-font-icon="fa fa-google-plus"></md-icon>
+                        </md-button>
+                    </md-fab-actions>
+                </md-fab-speed-dial>
+            </div>
+        </tri-widget>
+        <tri-widget palette-background="deep-orange:600">
+            <img src="assets/images/avatars/avatar-big.png" alt="my face">
+
+            <div>
+                <md-divider></md-divider>
+                <h2 class="opacity-90 margin-10 text-center">
+                    About me
+                </h2>
+                <p class="md-body-2 opacity-80 padding-normal padding-top-0 text-center">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi voluptatibus.
+                </p>
+            </div>
+        </tri-widget>
+    </div>
+
+    <div layout="row" layout-xs="column" layout-margin dragula='"drag-analytics-container"'>
+        <tri-widget palette-background="triCyan:600" content-layout="column" content-layout-align="space-between center" content-padding>
+            <p class="md-display-2 font-weight-100 margin-top-10 margin-bottom-0">{{vm.goalsResult.totalGoals}}</p>
+            <p class="md-body-2 opacity-60 margin-top-0 margin-bottom-10" translate>Total goals</p>
+        </tri-widget>
+        <tri-widget palette-background="triCyan:600" content-layout="column" content-layout-align="space-between center" content-padding>
+            <p class="md-display-2 font-weight-100 margin-top-10 margin-bottom-0"> {{vm.openGoals}}</p>
+            <p class="md-body-2 opacity-60 margin-top-0 margin-bottom-10" translate>Open goals</p>
+        </tri-widget>
+        <tri-widget palette-background="triCyan:600" content-layout="column" content-layout-align="space-between center" content-padding>
+            <p class="md-display-2 font-weight-100 margin-top-10 margin-bottom-0">{{vm.finishedGoals}}</p>
+            <p class="md-body-2 opacity-60 margin-top-0 margin-bottom-10" translate>Finished goals</p>
+        </tri-widget>
+    </div>
+    <div layout="row" layout-xs="column" layout-margin>
+        <tri-widget flex title="My goals" content-layout="column" content-layout-align="center">
+            <md-data-table-container>
+                <table md-data-table class="md-data-table" md-progress="vm.deferred">
+                    <thead md-order="vm.query.order" md-trigger="vm.getUsers">
+                    <tr>
+                        <th name="Date" order-by="DateCreated" decend-first></th>
+                        <th name="Name" order-by="Name"></th>
+                        <th name="Status" order-by="GoalStatus"></th>
+                        <th name="Effort estimation" order-by="Estimation"></th>
+                        <th name="Remaining estimation" order-by="RemainingEstimates"></th>
+                        <th name="Details"></th>
+                        <th name="Remove"></th>
+                        <th name="Add time"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="goal in vm.goalsResult.goals | orderBy: vm.query.order | limitTo: vm.query.limit : (vm.query.page -1) * vm.query.limit">
+                        <td>{{::goal.DateCreated | date}}</td>
+                        <td>{{::goal.Name}}</td>
+                        <td>
+                                <span class="status" ng-class="'status-' + goal.GoalStatus">
+                                    {{::goal.GoalStatus}}
+                                </span>
+                        </td>
+                        <td>{{::goal.Estimation | duration}}</td>
+                        <td>{{::goal.RemainingEstimates | duration}}</td>
+                        <td>
+                            <md-button ng-click="vm.openGoal(goal, $event)" class="md-icon-button" aria-label="Open Goal">
+                                <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
+                            </md-button>
+                        </td>
+                        <td>
+                            <md-button ng-click="vm.removeGoal(goal, $event)" class="md-icon-button" aria-label="Open Goal">
+                                <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                            </md-button>
+                        </td>
+                        <td>
+                            <md-button ng-click="vm.addExtraTimeEstimate(goal, $event)" class="md-icon-button" aria-label="Add time">
+                                <md-icon md-font-icon="zmdi zmdi-time"></md-icon>
+                            </md-button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </md-data-table-container>
+            <md-data-table-pagination md-limit="vm.query.limit" md-page="vm.query.page" md-total="{{vm.goalsResult.totalGoals}}"></md-data-table-pagination>
+        </tri-widget>
+    </div>
+</div>

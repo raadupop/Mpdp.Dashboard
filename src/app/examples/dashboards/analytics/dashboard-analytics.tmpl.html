@@ -1,0 +1,65 @@
+<div class="dashboard-container overlay-10 padded-content-page" layout="column">
+    <div class="drag-container" layout="row" layout-xs="column" layout-margin dragula='"drag-analytics-container"'>
+        <tri-widget palette-background="deep-orange:500" content-layout="row" content-layout-align="space-between center" content-padding>
+            <div>
+                <md-icon class="font-size-5 opacity-50 margin-left-10" md-font-icon="fa fa-paper-plane"></md-icon>
+            </div>
+            <div layout="column" layout-align="center end">
+                <p class="md-display-3 font-weight-100 margin-top-0 margin-bottom-0 text-ellipsis" countupto="vm.statistics.GoalsCount" decimals="0"></p>
+                <p class="md-body-2 opacity-60 margin-top-0 margin-bottom-0" translate>Goals</p>
+            </div>
+        </tri-widget>
+        <tri-widget palette-background="triCyan:500" content-layout="row" content-layout-align="space-between center" content-padding>
+            <div>
+                <md-icon class="font-size-5 opacity-50 margin-left-10" md-font-icon="fa fa-check-square-o"></md-icon>
+            </div>
+            <div layout="column" layout-align="center end">
+                <p class="md-display-3 font-weight-100 margin-top-0 margin-bottom-0 text-ellipsis" countupto="vm.statistics.CompletedGoalsCount" decimals="0"></p>
+                <p class="md-body-2 opacity-60 margin-top-0 margin-bottom-0" translate>Completed goals</p>
+            </div>
+        </tri-widget>
+        <tri-widget palette-background="indigo:500" content-layout="row" content-layout-align="space-between center" content-padding>
+            <div>
+                <md-icon class="font-size-5 opacity-50 margin-left-10" md-font-icon="fa fa-rocket"></md-icon>
+            </div>
+            <div layout="column" layout-align="center end">
+                <p class="md-display-3 font-weight-100 margin-top-0 margin-bottom-0" countupto="vm.statistics.ObjectivesCount" decimals="0"></p>
+                <p class="md-body-2 opacity-60 margin-top-0 margin-bottom-0" translate>Objectives</p>
+            </div>
+        </tri-widget>
+        <tri-widget palette-background="teal:500" content-layout="row" content-layout-align="space-between center" content-padding>
+            <div>
+                <md-icon class="font-size-5 opacity-50 margin-left-10" md-font-icon="fa fa-line-chart"></md-icon>
+            </div>
+            <div layout="column" layout-align="center end">
+                <p class="md-display-3 font-weight-100 margin-top-0 margin-bottom-0" countupto="vm.statistics.ObjectivesInProgressCount" decimals="0"></p>
+                <p class="md-body-2 opacity-60 margin-top-0 margin-bottom-0" translate>Objectives in progress</p>
+            </div>
+        </tri-widget>
+    </div>
+    <div layout="row" layout-xs="column" layout-margin>
+        <tri-widget chartjs-line-widget title="Progress & evolutions" subtitle="DASHBOARDS.ANALYTICS.DATE" content-layout="row" content-padding>
+            <canvas class="chart-line" chart-data="lineChart.data" chart-labels="lineChart.labels" chart-legend="true" chart-series="lineChart.series" chart-options="lineChart.options"></canvas>
+        </tri-widget>
+    </div>
+    <div layout="row" layout-xs="column" layout-margin>
+        <tri-widget chartjs-pie-widget title="DASHBOARDS.ANALYTICS.STATUS" subtitle="DASHBOARDS.ANALYTICS.DATE" content-padding>
+            <canvas class="chart-doughnut" chart-data="pieChart.data" chart-legend="true" chart-labels="pieChart.labels"></canvas>
+        </tri-widget>
+        <tri-widget flex load-data-widget="{ referrals: 'app/examples/dashboards/data/referrals.json' }" title="DASHBOARDS.ANALYTICS.DELAY" subtitle="DASHBOARDS.ANALYTICS.DELAYCOUNT" content-padding>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th name="Goals Name">Goals Name</th>
+                        <th name="Over time">Over time</th>
+                    </tr>
+                </thead>
+                <tbody class="md-caption">
+                    <tr ng-repeat="referral in ::referrals.data | limitTo:8">
+                        <td ng-repeat="data in ::referral | limitTo:3">{{::data}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </tri-widget>
+    </div>
+</div>

@@ -1,0 +1,81 @@
+<md-dialog flex="60" flex-xs="100">
+    <md-toolbar class="toolbar-default">
+        <div class="md-toolbar-tools">
+            <h2 flex>Remove goal</h2>
+            <md-button class="md-icon-button" ng-click="vm.cancelClick()" aria-label="cancel">
+                <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content class="md-dialog-content">
+        <div flex layout="row" class="margin-bottom-20">
+            <div flex>
+                <strong>Goal created date</strong>
+            </div>
+            <div flex>
+                <span>{{vm.goal.DateCreated | amDateFormat:'MMMM Do YYYY, h:mm:ss a'}}</span>
+            </div>
+        </div>
+        <div flex layout="row" class="margin-bottom-20">
+            <div flex>
+                <strong>Goal name</strong>
+            </div>
+            <div flex>
+                <span>{{vm.goal.Name}}</span>
+            </div>
+        </div>
+        <div flex layout="row" class="margin-bottom-20">
+            <div flex>
+                <strong translate>Goal status</strong>
+            </div>
+            <div flex>
+                <span>{{vm.goal.GoalStatus}}</span>
+            </div>
+        </div>
+        <div flex layout="row" class="margin-bottom-20">
+            <div flex>
+                <strong>Effort estimation by time</strong>
+            </div>
+            <div flex>
+                <span>{{vm.goal.Estimation | duration}}</span>
+            </div>
+        </div>
+        <div flex layout="row" class="margin-bottom-20">
+            <div flex>
+                <strong>Remaining estimation</strong>
+            </div>
+            <div flex>
+                <span>{{vm.goal.RemainingEstimation | duration}}</span>
+            </div>
+        </div>
+        <div flex layout="row" class="margin-bottom-20">
+            <div flex>
+                <strong>Number of objectives subscribed</strong>
+            </div>
+            <div flex>
+                <span>{{vm.goal.ObjectivesCount}}</span>
+            </div>
+        </div>
+        <div flex layout="row" class="margin-bottom-20">
+            <div flex>
+                <strong>Goal progress</strong>
+            </div>
+            <div flex>
+                <span><md-progress-linear class="md-accent margin-bottom-20" md-mode="determinate" value="{{vm.goal.Progress}}"></md-progress-linear></span>
+            </div>
+        </div>
+        <div flex layout="row" class="margin-bottom-20">
+            <div flex>
+                <strong>Goal description</strong>
+            </div>
+            <div flex>
+                <span>{{vm.goal.Description}}</span>
+            </div>
+        </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+        <span flex></span>
+        <md-button ng-click="vm.cancelClick()" aria-label="{{'GENERAL.CANCEL' | translate}}" translate="GENERAL.CANCEL"></md-button>
+        <md-button ng-click="vm.removeGoal()" class="md-primary" aria-label="{{GENERAL.OK | translate}}" translate="Delete"></md-button>
+    </md-dialog-actions>
+</md-dialog>

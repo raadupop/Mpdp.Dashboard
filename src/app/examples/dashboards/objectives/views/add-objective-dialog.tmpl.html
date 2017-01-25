@@ -1,0 +1,55 @@
+<md-dialog aria-label="Mango (Fruit)" flex="30" flex-xs="100">
+    <md-toolbar md-theme="{{triSkin.elements.content}}">
+        <div class="md-toolbar-tools">
+            <h2>
+                <span>Create Objective</span>
+            </h2>
+        </div>
+    </md-toolbar>
+    <md-divider></md-divider>
+    <md-dialog-content class="md-dialog-content">
+        <form name="taskForm" novalidate layout="column">
+            <md-input-container>
+                <label>Name</label>
+                <input ng-model="vm.objective.title" class="dialog-close" name="task" required/>
+                <div ng-messages="taskForm.task.$error">
+                    <div ng-message when="required">
+                        <span>Name is required</span>
+                    </div>
+                </div>
+            </md-input-container>
+            <md-input-container>
+                <label>Estimation</label>
+                <input ng-model="vm.objective.estimation" placeholder="Ex: 1d 2h 22m" class="dialog-close" name="task" required valid-estimation />
+                <div ng-messages="taskForm.task.$error">
+                    <div ng-message when="required">
+                        <span>Estimation is required</span>
+                    </div>
+                </div>
+            </md-input-container>
+            <md-input-container>
+                <label>Description</label>
+                <textarea rows="4" ng-model="vm.objective.description" required/>
+                <div ng-messages="taskForm.task.$error">
+                    <div ng-message when="required">
+                        <span>Description is required</span>
+                    </div>
+                </div>
+            </md-input-container>
+            <md-input-container>
+                <label translate>Rank</label>
+                <md-select placeholder="Priority" ng-model="vm.objective.objectiveRank">
+                    <md-option value="Critical">Critical</md-option>
+                    <md-option value="High">High</md-option>
+                    <md-option value="Medium">Medium</md-option>
+                    <md-option value="Low">Low</md-option>
+                </md-select>
+            </md-input-container>
+        </form>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+        <span flex></span>
+        <md-button ng-click="vm.cancel()">Cancel</md-button>
+        <md-button ng-click="vm.createObjective()" class="md-primary" ng-disabled="taskForm.$invalid">Ok</md-button>
+    </md-dialog-actions>
+</md-dialog>

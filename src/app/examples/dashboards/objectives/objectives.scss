@@ -1,0 +1,76 @@
+// - Icons
+.objectives-page {
+    md-content {
+        height: 500px;
+        .md-font {
+            font-size: 24px;
+        }
+    }
+    .status {
+        padding: 8px 14px;
+        border-radius: 6px;
+        min-width: 60px;
+        display: inline-block;
+        text-align: center;
+        color: #fff;
+    }
+    .status-Open {
+        background-color: #26C6DA;
+    }
+    .status-Closed {
+        background-color: #8BC34A;
+    }
+    .status-InProgress {
+        background-color: #FF9800;
+    }
+    .status-Done {
+        background-color: #86E023;
+    }
+    .status-Blocked{
+        background-color: #FF0000;
+    }
+    .status-StandBy{
+        background-color: #FF5600;
+    }
+
+    .ranked {
+        padding: 8px 14px;
+        border-radius: 6px;
+        min-width: 60px;
+        display: inline-block;
+        text-align: center;
+        color: #fff;
+    }
+
+    .ranked-Critical{
+        background-color: #FF0000;
+    }
+    .ranked-High{
+        background-color: #FF9800;
+    }
+    .ranked-Medium{
+        background-color: #26C6DA;
+    }
+    .ranked-Low{
+        background-color: #8464c4;
+    }
+
+    .sel {
+        background-color: rgba(255, 237, 19, 0.44);
+    }
+
+    .goal-list{
+        box-shadow: 0px 4px 5px -2px rgba(0, 0, 0, 0.2), 0px 7px 10px 1px rgba(0, 0, 0, 0.14), 0px 2px 16px 1px rgba(0, 0, 0, 0.12);
+        min-width: 150px;
+    }
+
+    .objective-dialog{
+        padding-left: 10px;
+    }
+
+
+
+
+}
+
+

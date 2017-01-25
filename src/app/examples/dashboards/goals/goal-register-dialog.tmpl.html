@@ -1,0 +1,35 @@
+<md-dialog flex="60" flex-xs="100">
+    <md-toolbar class="toolbar-default">
+        <div class="md-toolbar-tools">
+            <h2 flex>Goal Creation</h2>
+            <md-button class="md-icon-button" ng-click="vm.cancelClick()" aria-label="cancel">
+                <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content class="md-dialog-content">
+        <form name="goal">
+            <md-input-container class="md-block">
+                <label>Name</label>
+                <input type="text" ng-model="vm.goal.name" required/>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Description</label>
+                <textarea rows="4" ng-model="vm.goal.description" required/>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Estimation</label>
+                <input type="text" name="estimation" ng-model="vm.goal.estimation" placeholder="Ex: 1d 6h 30m" valid-estimation required/>
+                <div  ng-messages="goal.estimation.$error">
+                    <span ng-message="estimationValidator">Please follow the example.</span>
+                </div>
+            </md-input-container>
+        </form>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+        <span flex></span>
+        <md-button ng-click="vm.cancelClick()" aria-label="{{'GENERAL.CANCEL' | translate}}" translate="GENERAL.CANCEL"></md-button>
+        <md-button ng-click="vm.registerClick()" class="md-primary" aria-label="{{GENERAL.OK | translate}}" translate="GENERAL.OK" ng-disabled="goal.$invalid"></md-button>
+    </md-dialog-actions>
+</md-dialog>

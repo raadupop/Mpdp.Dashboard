@@ -1,0 +1,168 @@
+<md-dialog class="order-dialog mobile-fullwidth-dialog" flex="60" flex-xs="100">
+    <md-tabs class="example-tabs-nopadding" md-dynamic-height md-border-bottom>
+        <md-tab label="General Details">
+            <md-content class="md-padding">
+                <md-toolbar>
+                    <div class="md-toolbar-tools">
+                        <h2 flex >
+                            <span>Objective</span><span> #{{vm.objectiveDialog.Id}}</span>
+                        </h2>
+                        <md-button class="md-icon-button" ng-click="vm.printClick()" aria-label="print">
+                            <md-icon md-font-icon="zmdi zmdi-print"></md-icon>
+                        </md-button>
+                        <md-button class="md-icon-button" ng-click="vm.cancelClick()" aria-label="cancel">
+                            <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                        </md-button>
+                    </div>
+                </md-toolbar>
+                <md-dialog-content class="md-dialog-content">
+                    <div flex layout="row" class="margin-bottom-20">
+                        <div flex>
+                            <strong>Objective created date</strong>
+                        </div>
+                        <div flex>
+                            <span>{{vm.objectiveDialog.DateCreated | amDateFormat:'MMMM Do YYYY, h:mm:ss a'}}</span>
+                        </div>
+                    </div>
+                    <div flex layout="row" class="margin-bottom-20">
+                        <div flex>
+                            <strong>Objective name</strong>
+                        </div>
+                        <div flex>
+                            <span>{{vm.objectiveDialog.Title}}</span>
+                        </div>
+                    </div>
+                    <div flex layout="row" class="margin-bottom-20">
+                        <div flex>
+                            <strong translate>Objective status</strong>
+                        </div>
+                        <div flex>
+                            <span>{{vm.objectiveDialog.ObjectiveStatus}}</span>
+                        </div>
+                    </div>
+                    <div flex layout="row" class="margin-bottom-20">
+                        <div flex>
+                            <strong translate>Objective rank</strong>
+                        </div>
+                        <div flex>
+                            <span>{{vm.objectiveDialog.ObjectiveRank}}</span>
+                        </div>
+                    </div>
+                    <div flex layout="row" class="margin-bottom-20">
+                        <div flex>
+                            <strong>Effort estimation by time</strong>
+                        </div>
+                        <div flex>
+                            <span>{{vm.objectiveDialog.Estimation | duration}}</span>
+                        </div>
+                    </div>
+                    <div flex layout="row" class="margin-bottom-20">
+                        <div flex>
+                            <strong>Remaining estimation</strong>
+                        </div>
+                        <div flex>
+                            <span>{{vm.objectiveDialog.RemainingEstimates | duration}}</span>
+                        </div>
+                    </div>
+                    <div flex layout="row" class="margin-bottom-20">
+                        <div flex>
+                            <strong>Extra effort time</strong>
+                        </div>
+                        <div flex>
+                            <span>{{vm.objectiveDialog.ExtraTime | duration}}</span>
+                        </div>
+                    </div>
+                    <div flex layout="row" class="margin-bottom-20">
+                        <div flex>
+                            <strong>Objective progress</strong>
+                        </div>
+                        <div flex>
+                            <span><md-progress-linear class="md-accent margin-bottom-20" md-mode="determinate" value="{{vm.objectiveDialog.Progress}}"></md-progress-linear></span>
+                        </div>
+                    </div>
+                    <div flex layout="row" class="margin-bottom-20">
+                        <div flex>
+                            <strong>Objective description</strong>
+                        </div>
+                        <div flex>
+                            <span>{{vm.objectiveDialog.Description}}</span>
+                        </div>
+                    </div>
+                    <md-divider class="margin-bottom-20 margin-top-60"></md-divider>
+                </md-dialog-content>
+                <md-dialog-actions layout="row">
+                    <md-button ng-click="vm.okClick()" class="md-primary" aria-label="{{GENERAL.OK | translate}}" translate="GENERAL.OK"></md-button>
+                </md-dialog-actions>
+            </md-content>
+        </md-tab>
+        <md-tab label="Objective update">
+            <md-content class="md-padding">
+                <form name="objective" class="margin-top-20">
+                    <md-input-container class="md-block">
+                        <label>Name</label>
+                        <input type="text" ng-model="vm.objectiveDialog.Title" required/>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Description</label>
+                        <textarea rows="4" ng-model="vm.objectiveDialog.Description" required/>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Effort estimation</label>
+                        <input type="text" name="estimation" ng-model="vm.objectiveDialog.Estimation | duration" valid-estimation required/>
+                        <div  ng-messages="objecitve.estimation.$error">
+                            <span ng-message="estimationValidator">Please follow the example.</span>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Extra time effort</label>
+                        <input type="text" name="remainingEstimation" ng-model="vm.objectiveDialog.RemainingEstimates | duration" valid-estimation required/>
+                        <div  ng-messages="objective.remainingEstimation.$error">
+                            <span ng-message="estimationValidator">Please follow the example.</span>
+                        </div>
+                    </md-input-container>
+                    <md-select placeholder="Pick" ng-model="vm.objectiveDialog.ObjectiveStatus">
+                        <md-option value="Open">Open</md-option>
+                        <md-option value="Blocked">Blocked</md-option>
+                        <md-option value="InProgress">InProgress</md-option>
+                        <md-option value="Done">Done</md-option>
+                        <md-option value="Closed">Closed</md-option>
+                        <md-option value="StandBy">StandBy</md-option>
+                    </md-select>
+                    <md-select placeholder="Pick" ng-model="vm.objectiveDialog.ObjectiveRank">
+                        <md-option value="Critical">Critical</md-option>
+                        <md-option value="High">High</md-option>
+                        <md-option value="Medium">Medium</md-option>
+                        <md-option value="Low">Low</md-option>
+                    </md-select>
+                    <span>Objective Progress - Value: {{vm.objectiveDialog.Progress}}</span>
+                    <md-slider min="0" max="100" ng-model="vm.objectiveDialog.Progress" ng-init="vm.objectiveDialog.Progress" aria-label="default value"></md-slider>
+                    <div layout="row" layout-align="end center">
+                        <md-button class="md-primary" ng-click="vm.updateClick()" ng-disabled="objective.$invalid">Update</md-button>
+                        <md-button ng-click="vm.okClick()">Cancel</md-button>
+                    </div>
+                </form>
+            </md-content>
+        </md-tab>
+        <md-tab label="Worked Logs">
+                <md-content class="md-padding">
+                    <form name="workedlogs" class="margin-top-20">
+                        <md-input-container class="md-block">
+                            <label>Worked logs</label>
+                            <input type="text" placeholder="Ex: 1d 10h 10m" ng-model="vm.workedLog.Duration" valid-estimation required/>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label>Descritpion</label>
+                            <input type="text" ng-model="vm.workedLog.Description" required/>
+                        </md-input-container>
+                        <div layout="row" layout-align="start">
+                            <md-datepicker style="margin-left: -12px;" layout-align="center" ng-model="vm.workedLog.DateRecorded"  datetime="yyyy-MM-dd HH:mm:ss" md-placeholder="Date" required=""></md-datepicker>
+                        </div>
+                        <div layout="row" layout-align="end center">
+                            <md-button class="md-primary" ng-click="vm.addTimeWorking()" ng-disabled="workedlogs.$invalid">Save</md-button>
+                            <md-button ng-click="vm.cancelClick()">Cancel</md-button>
+                        </div>
+                    </form>
+                </md-content>
+        </md-tab>
+    </md-tabs>
+</md-dialog>

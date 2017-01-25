@@ -1,0 +1,27 @@
+<md-card flex>
+    <md-card-content>
+        <h2>Create Goal</h2>
+        <form name="goal">
+            <md-input-container class="md-block">
+                <label>Name</label>
+                <input type="text" ng-model="vm.goal.name" required/>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Description</label>
+                <textarea rows="4" ng-model="vm.goal.description" required/>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Estimation</label>
+                <input type="text" name="estimation" ng-model="vm.goal.estimation" placeholder="Ex: 1d 6h 30m" valid-estimation required/>
+                <div  ng-messages="goal.estimation.$error">
+                    <span ng-message="estimationValidator">Please follow the example.</span>
+                </div>
+            </md-input-container>
+            <div layout="row" layout-align="end center">
+                <md-button class="md-primary" ng-click="vm.registerClick()" ng-disabled="goal.$invalid">Create</md-button>
+                <md-button>Cancel</md-button>
+            </div>
+        </form>
+    </md-card-content>
+</md-card>
+
