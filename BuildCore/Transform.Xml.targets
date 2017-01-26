@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- This target will run before the build -->
+
+  <ItemGroup>
+    <ConfigFiles Include="$(ProjectDir)**\*.template.config" />
+    <ConfigFiles Include="$(ProjectDir)**\*.template.xml" />
+  </ItemGroup>
+
+  <UsingTask TaskName="TransformXml" AssemblyFile="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v10.0\Web\Microsoft.Web.Publishing.Tasks.dll"/>
+
+  <Target Name="CustomTransformConfigs" BeforeTargets="Compile">
+    <CallTarget Targets="CustomTransformConfigFile" />
+  </Target>
+
+  <Target Name="CustomTransformConfigFile" Inputs="@(ConfigFiles)" Outputs="%(Identity).Dummy">
+    <PropertyGroup>
+      <TemplateConfigFileName>%(ConfigFiles.Filename)</TemplateConfigFileName>
+      <CleanFileName>$(TemplateConfigFileName.Replace(".template", ""))</CleanFileName>
+    </PropertyGroup>
+
+    <TransformXml Source="%(RelativeDir)$(CleanFileName).template%(ConfigFiles.Extension)"
+                  Transform="%(RelativeDir)$(CleanFileName).$(Configuration)%(ConfigFiles.Extension)"
+                  Destination="%(RelativeDir)$(CleanFileName)%(ConfigFiles.Extension)" />
+  </Target>
+</Project>
