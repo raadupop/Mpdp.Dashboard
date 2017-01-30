@@ -1,0 +1,6 @@
+D:\RaduPop\GIT\Mpdp.Dashboard\Mpdp.Dashboard.Content\bin\Mpdp.Dashboard.dll.config
+D:\RaduPop\GIT\Mpdp.Dashboard\Mpdp.Dashboard.Content\bin\Mpdp.Dashboard.dll
+D:\RaduPop\GIT\Mpdp.Dashboard\Mpdp.Dashboard.Content\bin\Mpdp.Dashboard.pdb
+D:\RaduPop\GIT\Mpdp.Dashboard\Mpdp.Dashboard.Content\obj\Mpdp.Dashboard.Qa\Mpdp.Dashboard.Content.csprojResolveAssemblyReference.cache
+D:\RaduPop\GIT\Mpdp.Dashboard\Mpdp.Dashboard.Content\obj\Mpdp.Dashboard.Qa\Mpdp.Dashboard.dll
+D:\RaduPop\GIT\Mpdp.Dashboard\Mpdp.Dashboard.Content\obj\Mpdp.Dashboard.Qa\Mpdp.Dashboard.pdb
