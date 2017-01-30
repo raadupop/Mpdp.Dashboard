@@ -8,14 +8,14 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
-		Mpdp.Dashboard.Qa|Any CPU = Mpdp.Dashboard.Qa|Any CPU
+		Mpdp.Qa|Any CPU = Mpdp.Qa|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{4E741D78-5E16-4324-924B-D35E874E0342}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4E741D78-5E16-4324-924B-D35E874E0342}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4E741D78-5E16-4324-924B-D35E874E0342}.Mpdp.Dashboard.Qa|Any CPU.ActiveCfg = Mpdp.Dashboard.Qa|Any CPU
-		{4E741D78-5E16-4324-924B-D35E874E0342}.Mpdp.Dashboard.Qa|Any CPU.Build.0 = Mpdp.Dashboard.Qa|Any CPU
+		{4E741D78-5E16-4324-924B-D35E874E0342}.Mpdp.Qa|Any CPU.ActiveCfg = Mpdp.Qa|Any CPU
+		{4E741D78-5E16-4324-924B-D35E874E0342}.Mpdp.Qa|Any CPU.Build.0 = Mpdp.Qa|Any CPU
 		{4E741D78-5E16-4324-924B-D35E874E0342}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E741D78-5E16-4324-924B-D35E874E0342}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
